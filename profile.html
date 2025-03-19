@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(./pics/profile-back.jpg);
+            background-repeat: no-repeat ;
+            background-size: cover;
+        }
+
+        .navbar {
+            background-color: #000000d6;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+        
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+            background-color: #fff;
+            
+        }
+
+        .profile-container {
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4a0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+            top: 2rem;
+        }
+
+        .profile-container h2 {
+            text-align: center;
+        }
+
+        .profile-info p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .profile-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .projects-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .projects-list li {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .submitted-photos {
+            margin-top: 20px;
+        }
+
+        .submitted-photos img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin: 5px;
+            border-radius: 8px;
+        }
+
+        .btn-logout {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .btn-logout:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Profile</a>
+        <a href="#" id="logoutBtn">Logout</a>
+    </div>
+
+    <div class="profile-container">
+        <h2>Profile</h2>
+
+        <!-- Profile Image -->
+        <div class="profile-image">
+            <img id="profileImg" src="" alt="Profile Image">
+        </div>
+
+        <div class="profile-info">
+            <p id="userName">Loading...</p>
+            <p id="userEmail">Loading...</p>
+            <p id="userRole">Loading...</p>
+        </div>
+
+        <div id="creatorProjects" style="display: none;">
+            <h3>Projects:</h3>
+            <ul class="projects-list" id="projectsList">
+                <!-- Project items will be added here dynamically -->
+            </ul>
+        </div>
+
+        <!-- Submitted Photos -->
+        <div class="submitted-photos" id="submittedPhotos" style="display: none;">
+            <h3>Submitted Photos:</h3>
+            <div id="photoGallery"></div>
+        </div>
+
+        <!-- <button class="btn-logout" id="logoutBtn">Logout</button> -->
+    </div>
+
+    <script>
+        // Get user data from localStorage
+        const normalUser = JSON.parse(localStorage.getItem('normalUser'));
+        const creator = JSON.parse(localStorage.getItem('creator'));
+
+        // Get the elements to display user info
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
+        const userRole = document.getElementById('userRole');
+        const profileImg = document.getElementById('profileImg');
+        const creatorProjects = document.getElementById('creatorProjects');
+        const projectsList = document.getElementById('projectsList');
+        const submittedPhotos = document.getElementById('submittedPhotos');
+        const photoGallery = document.getElementById('photoGallery');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Function to set profile image if available
+        const setProfileImage = (imageURL) => {
+            if (imageURL) {
+                profileImg.src = imageURL;
+            } else {
+                profileImg.src = 'default-profile.png'; // Placeholder image if no profile image is set
+            }
+        };
+
+        // Check if the user is logged in
+        if (!normalUser && !creator) {
+            // Redirect to login page if no user is logged in
+            window.location.href = 'login-signup.html';
+        } else if (normalUser) {
+            userName.textContent = `Name: ${normalUser.name}`;
+            userEmail.textContent = `Email: ${normalUser.email}`;
+            userRole.textContent = `Role: User`;
+            setProfileImage(normalUser.profileImage); // Set profile image for normal user
+        } else if (creator) {
+            userName.textContent = `Name: ${creator.name}`;
+            userEmail.textContent = `Email: ${creator.email}`;
+            userRole.textContent = `Role: ${creator.role || 'Creator'}`;
+
+            // Set the profile image for creator
+            setProfileImage(creator.profileImage);
+
+            // Display the creator's projects if they exist
+            if (creator.projects && creator.projects.length > 0) {
+                creatorProjects.style.display = 'block';
+                creator.projects.forEach(project => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = project.name;
+                    projectsList.appendChild(listItem);
+                });
+            }
+
+            // Display submitted photos if available
+            if (creator.photos && creator.photos.length > 0) {
+                submittedPhotos.style.display = 'block';
+                creator.photos.forEach(photoURL => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = photoURL;
+                    imgElement.alt = "Submitted Photo";
+                    photoGallery.appendChild(imgElement);
+                });
+            }
+        }
+
+        // Logout function
+        logoutBtn.addEventListener('click', () => {
+            // Clear all user-related data from localStorage
+            localStorage.removeItem('normalUser');
+            localStorage.removeItem('creator');
+
+            // Redirect to login/signup page
+            window.location.href = 'login-signup.html';
+        });
+    </script>
+</body>
+
+</html>

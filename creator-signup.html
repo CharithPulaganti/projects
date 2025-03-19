@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and container styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #ffffff;
+            padding: 20px;
+            background-image: url(./pics/creator-cover.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        section {
+            width: 100%;
+            height: 150vh;
+        }
+
+        .container{
+            background-color: rgba(0, 0, 0, 0.284);
+            padding: 10px 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        /* Form container */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form label and inputs */
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="url"],
+        input[type="file"],
+        input[type="checkbox"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Styling for file input */
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        label[for="agreeCheckbox"] {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Success and Error Alerts */
+        .alert {
+            color: green;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: red;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="container">
+            <h2>Creator Sign Up</h2>
+            <form id="creatorForm" style="background-color: rgba(0, 0, 0, 0.59);">
+                <label for="name">Name:</label><br>
+                <input type="text" id="creatorName" required><br>
+
+                <label for="age">Age:</label><br>
+                <input type="number" id="age" required><br>
+
+                <label for="mobile">Mobile Number:</label><br>
+                <input type="tel" id="mobile" required><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="creatorEmail" required><br>
+
+                <label for="education">Education Qualification:</label><br>
+                <input type="text" id="education" required><br>
+
+                <label for="resume">Resume (URL):</label><br>
+                <input type="url" id="resume" required><br>
+
+                <label for="photos">Upload 3 Project Photos:</label><br>
+                <input type="file" id="photo1" accept="image/*" required><br>
+                <input type="file" id="photo2" accept="image/*" required><br>
+                <input type="file" id="photo3" accept="image/*" required><br><br>
+
+                <label>
+                    <input type="checkbox" id="agreeCheckbox" required>
+                    I agree to pay 7% of my earnings from every project to this platform.
+                </label><br><br>
+
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="creator-signup.js"></script>
+</body>
+
+</html>

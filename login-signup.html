@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Sign Up</title>
+  <style>
+    /* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and container styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+    text-align: center;
+    background-image: url(./pics/pexels-kelly-1179532-2950003.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Buttons container */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 200px;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #45a049;
+}
+
+/* Styling for the buttons (Login and Sign up as Normal User, Sign Up as Creator) */
+#normalUserBtn {
+    background-color: #007bff;
+}
+
+#normalUserBtn:hover {
+    background-color: #0056b3;
+}
+
+#creatorBtn {
+    background-color: #28a745;
+}
+
+#creatorBtn:hover {
+    background-color: #218838;
+}
+  </style>
+</head>
+<body>
+
+<h2>Login | Sign Up</h2>
+
+<!-- Buttons for login and signup -->
+<button id="normalUserBtn">Login | Sign Up as Normal User</button>
+<button id="creatorBtn">Sign Up as Creator</button>
+
+<script src="login-signup.js"></script>
+</body>
+</html>
